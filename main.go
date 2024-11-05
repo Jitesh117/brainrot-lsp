@@ -32,11 +32,9 @@ func initialize(context *glsp.Context, params *protocol.InitializeParams) (any, 
 	commonlog.NewInfoMessage(0, "Initializing Brainrot server...")
 	capabilities := handler.CreateServerCapabilities()
 
-	// Existing completion provider setup
 	trueVar := true
 	capabilities.CompletionProvider = &protocol.CompletionOptions{
-		TriggerCharacters: []string{".", "!", "#"},
-		ResolveProvider:   &trueVar,
+		ResolveProvider: &trueVar,
 	}
 
 	return protocol.InitializeResult{
