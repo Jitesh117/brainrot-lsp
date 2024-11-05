@@ -17,7 +17,6 @@ var (
 	handler protocol.Handler
 )
 
-// main.go update
 func main() {
 	commonlog.Configure(2, nil)
 	handler = protocol.Handler{
