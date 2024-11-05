@@ -14,6 +14,8 @@ func TextDocumentCompletion(
 	params *protocol.CompletionParams,
 ) (interface{}, error) {
 	var completionItems []protocol.CompletionItem
+
+	// FOR AUTOCOMPLETE BRAINROT
 	for word, entry := range mappers.BrainrotMapper {
 		term := entry.Term
 		description := entry.Description
@@ -24,5 +26,20 @@ func TextDocumentCompletion(
 			InsertText: &term,
 		})
 	}
+	for label, snippet := range mappers.CodeSnippets {
+		insertText := snippet.Body
+		detail := snippet.Description
+		kind := protocol.CompletionItemKindSnippet
+		textFormat := protocol.InsertTextFormatSnippet
+
+		completionItems = append(completionItems, protocol.CompletionItem{
+			Label:            label,
+			Detail:           &detail,
+			InsertText:       &insertText,
+			Kind:             &kind,
+			InsertTextFormat: &textFormat,
+		})
+	}
+
 	return completionItems, nil
 }
